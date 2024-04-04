@@ -14,16 +14,17 @@
   justify-content: space-between;
   .title {
     padding: 6px;
+    font-weight: 600;
   }
   .menu-icon {
     padding: 6px;
-    display: none;
     cursor: pointer;
   }
   .menu {
     display: flex;
     text-align: center;
     justify-content: center;
+    position: relative;
     .menu-items {
       display: flex;
       text-align: center;
@@ -32,6 +33,9 @@
         padding: 6px;
         cursor: pointer;
       }
+    }
+    .x-icon {
+      display: none;
     }
   }
 }
@@ -61,11 +65,10 @@
   width: 1200px;
   align-items: center;
   justify-content: center;
-  background-color: #faf1e6;
   .small-box {
     display: flex;
     align-items: center;
-    background-color: #f8e1e5;
+    background-color: rgb(250, 241, 230);
     height: 50px;
     width: 100%;
     margin: 10px;
@@ -82,7 +85,6 @@
 
 .big-boxes {
   width: 1200px;
-  background-color: #faf1e6;
   display: grid;
   grid-template-columns: 380px 180px 180px 180px 180px;
   grid-template-rows: 200px 200px;
@@ -104,7 +106,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(238, 238, 238, 0.5);
+      background-color: rgba(250, 241, 230, 0.5);
     }
     i {
       position: absolute;
