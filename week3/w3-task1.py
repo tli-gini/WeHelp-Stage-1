@@ -3,6 +3,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 import urllib.request as request 
 import json
 import csv
+from collections import defaultdict
 
 src1 = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
 src2 = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-2"
@@ -19,10 +20,10 @@ def main():
         data2=resp2['data']
         
         for data in data2:
-            station = data['MRT'] + "站"
+            station = data['MRT'] 
             if station not in mrts:
-                mrts.append(data['MRT']+"站")
-        print(mrts)
+                mrts.append(data['MRT'])
+        # print(mrts)
 
     with open("spot.csv","w",encoding="utf-8") as file:   
         writer = csv.writer(file)
@@ -48,22 +49,27 @@ def main():
     with open("mrt.csv","w",encoding="utf-8") as file:  
         writer = csv.writer(file)
         stations_with_attractions = []
-        for mrt in mrts:
-            attractions=[]
+
+        for data in data2:
+            station = data["MRT"]
+            sn = data["SERIAL_NO"]
             for spot in spots:
-                info = spot["info"]
-                if mrt in info :
-                    if mrt == "北投站" and ("新北投" in info):
-                        print(spot["stitle"])
-                        continue
-                    attractions.append(spot["stitle"])
-            
-            station_info = [mrt[:-1]] + attractions
+                if spot["SERIAL_NO"] == sn:
+                    stitle = spot["stitle"]
+                    stations_with_attractions.append((station, stitle))
+        
+        print(len(stations_with_attractions))
 
-                    
-            stations_with_attractions.append(station_info)
+        aggregated = defaultdict(list)
 
-        for station_info in stations_with_attractions:
+        for key, value in stations_with_attractions:
+            aggregated[key].append(value)
+
+        result = [[key] + values for key, values in aggregated.items()]
+        # print(result)
+        
+
+        for station_info in result:
             writer.writerow(station_info)
         
                 
