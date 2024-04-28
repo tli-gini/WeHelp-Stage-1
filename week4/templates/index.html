@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歡迎光臨</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #223344;
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    .signin-header {
+      padding: 10px 0;
+    }
+    .input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 0;
+    }
+    .input-text {
+      padding-right: 8px;
+      font-weight: 300;
+    }
+    .input-box {
+      width: 120px;
+    }
+    .checkbox {
+      padding: 8px 0;
+    }
+    button {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  </style>
+  <body>
+    <div class="header">歡迎光臨，請輸入帳號密碼</div>
+    <form action="/signin" method="post" id="loginForm">
+      <div class="container">
+        <div class="signin-header">登入系統</div>
+        <div class="inputs">
+          <div class="input">
+            <div class="input-text">帳號</div>
+            <input
+              class="input-box"
+              id="username"
+              type="text"
+              name="username"
+            />
+          </div>
+          <div class="input">
+            <div class="input-text">密碼</div>
+            <input
+              class="input-box"
+              id="password"
+              type="password"
+              name="password"
+            />
+          </div>
+          <div class="input checkbox">
+            <div class="input-text">同意條款</div>
+            <input type="checkbox" id="checkbox" name="terms" />
+          </div>
+        </div>
+        <div class="button">
+          <button type="submit" id="signinButton">登入</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          var checkbox = document.getElementById("checkbox");
+          if (!checkbox.checked) {
+            event.preventDefault();
+            alert("Please check the checkbox first.");
+          }
+        });
+    </script>
+  </body>
+</html>
