@@ -3,35 +3,114 @@
 ### Task 2
 
 - Create a new database named website.
-  ![Local Image](./screenshot/task2-1.png)
+
+```sql
+CREATE DATABASE website;
+
+```
+
+![Local Image](./screenshot/task2-1.png)
 
 - Create a new table named member, in the website database, designed as below:
-  ![Local Image](./screenshot/task2-2.png)
+
+```sql
+USE website;
+
+```
+
+```sql
+CREATE TABLE member (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    follower_count INT UNSIGNED NOT NULL DEFAULT 0,
+    time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+```
+
+![Local Image](./screenshot/task2-2.png)
 
 ### Task 3
 
 - INSERT a new row to the member table where name, username and password must be set to test.
   INSERT additional 4 rows with arbitrary data.
-  ![Local Image](./screenshot/task3-1.png)
+
+  ```sql
+  INSERT INTO member (name, username, password)
+  VALUES ('test', 'test', 'test');
+  ```
+
+  ```sql
+  INSERT INTO member (name, username, password) VALUES
+  ('Alice', 'alice', '123123'),
+  ('Bob', 'bob', '456456'),
+  ('Charlie', 'charlie', '789789'),
+  ('Dolly', 'dolly', '000000');
+  ```
+
+![Local Image](./screenshot/task3-1.png)
 
 - SELECT all rows from the member table.
-  ![Local Image](./screenshot/task3-2.png)
+
+```sql
+SELECT * FROM member;
+```
+
+![Local Image](./screenshot/task3-2.png)
 
 - SELECT all rows from the member table, in descending order of time.
-  ![Local Image](./screenshot/task3-3.png)
+
+```sql
+SELECT * FROM member
+ORDER BY time DESC;
+
+```
+
+![Local Image](./screenshot/task3-3.png)
 
 - SELECT total 3 rows, second to fourth, from the member table, in descending order of time.
   Note: it does not mean SELECT rows where id are 2, 3, or 4.
+
+  ```sql
+  SELECT * FROM member
+  ORDER BY time DESC
+  LIMIT 3 OFFSET 1;
+
+  ```
+
   ![Local Image](./screenshot/task3-4.png)
 
 - SELECT rows where username equals to test.
-  ![Local Image](./screenshot/task3-5.png)
+
+```sql
+SELECT * FROM member
+WHERE username = 'test';
+
+```
+
+![Local Image](./screenshot/task3-5.png)
 
 - SELECT rows where name includes the es keyword.
-  ![Local Image](./screenshot/task3-6.png)
+
+```sql
+SELECT * FROM member
+WHERE name LIKE '%es%';
+
+```
+
+![Local Image](./screenshot/task3-6.png)
 
 - SELECT rows where both username and password equal to test.
-  ![Local Image](./screenshot/task3-7.png)
+
+```sql
+SELECT * FROM member
+WHERE username = 'test' AND password = 'test';
+
+```
+
+![Local Image](./screenshot/task3-7.png)
 
 - UPDATE data in name column to test2 where username equals to test.
 
@@ -53,5 +132,3 @@ SELECT COUNT(*) FROM member;
 ```
 
 ![Local Image](./screenshot/task4-1.png)
-
-### link:
