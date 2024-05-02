@@ -132,3 +132,52 @@ SELECT COUNT(*) FROM member;
 ```
 
 ![Local Image](./screenshot/task4-1.png)
+
+- SELECT the sum of follower_count of all the rows from the member table.
+
+```sql
+SELECT SUM(follower_count) AS TotalFollowers FROM member;
+```
+
+![Local Image](./screenshot/task4-2.png)
+
+- SELECT the average of follower_count of all the rows from the member table.
+
+  - update the 'follower_count'
+
+  ```sql
+  UPDATE member
+  SET follower_count =
+    CASE
+        WHEN name = 'test2' THEN 10
+        WHEN name = 'Alice' THEN 20
+        WHEN name = 'Bob' THEN 30
+        WHEN name = 'Charlie' THEN 40
+        WHEN name = 'Dolly' THEN 50
+    END;
+
+  ```
+
+  - calculate the average
+
+  ```sql
+  SELECT AVG(follower_count) AS AverageFollowers FROM member;
+
+  ```
+
+  ![Local Image](./screenshot/task4-3.png)
+
+- SELECT the average of follower_count of the first 2 rows, in descending order of follower_count, from the member table.
+
+```sql
+SELECT AVG(follower_count) AS AverageFollowers
+FROM (
+    SELECT follower_count
+    FROM member
+    ORDER BY follower_count DESC
+    LIMIT 2
+) AS subquery;
+
+```
+
+![Local Image](./screenshot/task4-4.png)
