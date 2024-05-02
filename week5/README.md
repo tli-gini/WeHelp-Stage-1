@@ -34,7 +34,14 @@
   ![Local Image](./screenshot/task3-7.png)
 
 - UPDATE data in name column to test2 where username equals to test.
-  ![Local Image](./screenshot/task3-8.png)
+
+```sql
+UPDATE member
+SET name = 'test2'
+WHERE username = 'test';
+```
+
+![Local Image](./screenshot/task3-8.png)
 
 ### Task 4
 
