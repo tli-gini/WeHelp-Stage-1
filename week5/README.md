@@ -33,7 +33,18 @@
 - SELECT rows where both username and password equal to test.
   ![Local Image](./screenshot/task3-7.png)
 
-- UPDATE data in name column to test2 where username equals to test
+- UPDATE data in name column to test2 where username equals to test.
   ![Local Image](./screenshot/task3-8.png)
+
+### Task 4
+
+- SELECT how many rows from the member table.
+
+```sql
+SELECT COUNT(*) FROM member;
+
+```
+
+![Local Image](./screenshot/task4-1.png)
 
 ### link:
