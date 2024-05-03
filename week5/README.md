@@ -4,31 +4,31 @@
 
 - Create a new database named website.
 
-```sql
-CREATE DATABASE website;
+  ```sql
+  CREATE DATABASE website;
 
-```
+  ```
 
 ![Local Image](./screenshot/task2-1.png)
 
 - Create a new table named member, in the website database, designed as below:
 
-```sql
-USE website;
+  ```sql
+  USE website;
 
-```
+  ```
 
-```sql
-CREATE TABLE member (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    follower_count INT UNSIGNED NOT NULL DEFAULT 0,
-    time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+  ```sql
+  CREATE TABLE member (
+      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      username VARCHAR(255) NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      follower_count INT UNSIGNED NOT NULL DEFAULT 0,
+      time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
 
-```
+  ```
 
 ![Local Image](./screenshot/task2-2.png)
 
@@ -54,19 +54,20 @@ CREATE TABLE member (
 
 - SELECT all rows from the member table.
 
-```sql
-SELECT * FROM member;
-```
+  ```sql
+  SELECT * FROM member;
+
+  ```
 
 ![Local Image](./screenshot/task3-2.png)
 
 - SELECT all rows from the member table, in descending order of time.
 
-```sql
-SELECT * FROM member
-ORDER BY time DESC;
+  ```sql
+  SELECT * FROM member
+  ORDER BY time DESC;
 
-```
+  ```
 
 ![Local Image](./screenshot/task3-3.png)
 
@@ -80,45 +81,45 @@ ORDER BY time DESC;
 
   ```
 
-  ![Local Image](./screenshot/task3-4.png)
+![Local Image](./screenshot/task3-4.png)
 
 - SELECT rows where username equals to test.
 
-```sql
-SELECT * FROM member
-WHERE username = 'test';
+  ```sql
+  SELECT * FROM member
+  WHERE username = 'test';
 
-```
+  ```
 
 ![Local Image](./screenshot/task3-5.png)
 
 - SELECT rows where name includes the es keyword.
 
-```sql
-SELECT * FROM member
-WHERE name LIKE '%es%';
+  ```sql
+  SELECT * FROM member
+  WHERE name LIKE '%es%';
 
-```
+  ```
 
 ![Local Image](./screenshot/task3-6.png)
 
 - SELECT rows where both username and password equal to test.
 
-```sql
-SELECT * FROM member
-WHERE username = 'test' AND password = 'test';
+  ```sql
+  SELECT * FROM member
+  WHERE username = 'test' AND password = 'test';
 
-```
+  ```
 
 ![Local Image](./screenshot/task3-7.png)
 
 - UPDATE data in name column to test2 where username equals to test.
 
-```sql
-UPDATE member
-SET name = 'test2'
-WHERE username = 'test';
-```
+  ```sql
+  UPDATE member
+  SET name = 'test2'
+  WHERE username = 'test';
+  ```
 
 ![Local Image](./screenshot/task3-8.png)
 
@@ -126,18 +127,19 @@ WHERE username = 'test';
 
 - SELECT how many rows from the member table.
 
-```sql
-SELECT COUNT(*) FROM member;
+  ```sql
+  SELECT COUNT(*) FROM member;
 
-```
+  ```
 
 ![Local Image](./screenshot/task4-1.png)
 
 - SELECT the sum of follower_count of all the rows from the member table.
 
-```sql
-SELECT SUM(follower_count) AS TotalFollowers FROM member;
-```
+  ```sql
+  SELECT SUM(follower_count) AS TotalFollowers FROM member;
+
+  ```
 
 ![Local Image](./screenshot/task4-2.png)
 
@@ -165,20 +167,20 @@ SELECT SUM(follower_count) AS TotalFollowers FROM member;
 
   ```
 
-  ![Local Image](./screenshot/task4-3.png)
+![Local Image](./screenshot/task4-3.png)
 
 - SELECT the average of follower_count of the first 2 rows, in descending order of follower_count, from the member table.
 
-```sql
-SELECT AVG(follower_count) AS AverageFollowers
-FROM (
-    SELECT follower_count
-    FROM member
-    ORDER BY follower_count DESC
-    LIMIT 2
-) AS subquery;
+  ```sql
+  SELECT AVG(follower_count) AS AverageFollowers
+  FROM (
+      SELECT follower_count
+      FROM member
+      ORDER BY follower_count DESC
+      LIMIT 2
+  ) AS subquery;
 
-```
+  ```
 
 ![Local Image](./screenshot/task4-4.png)
 
@@ -186,17 +188,17 @@ FROM (
 
 - Create a new table named message, in the website database. designed as below:
 
-```sql
-CREATE TABLE message (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    member_id BIGINT NOT NULL,
-    content VARCHAR(255) NOT NULL,
-    like_count INT UNSIGNED NOT NULL DEFAULT 0,
-    time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (member_id) REFERENCES member(id)
-);
+  ```sql
+  CREATE TABLE message (
+      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      member_id BIGINT NOT NULL,
+      content VARCHAR(255) NOT NULL,
+      like_count INT UNSIGNED NOT NULL DEFAULT 0,
+      time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (member_id) REFERENCES member(id)
+  );
 
-```
+  ```
 
 ![Local Image](./screenshot/task5-1.png)
 
@@ -223,17 +225,17 @@ CREATE TABLE message (
   JOIN member mb ON m.member_id = mb.id;
   ```
 
-  ![Local Image](./screenshot/task5-2.png)
+![Local Image](./screenshot/task5-2.png)
 
 - SELECT all messages, including sender names, where sender username equals to test.
   We have to JOIN the member table to filter and get that.
 
-```sql
-SELECT m.id, m.content, m.like_count, m.time, mb.name AS sender_name
-FROM message m
-JOIN member mb ON m.member_id = mb.id
-WHERE mb.username = 'test';
-```
+  ```sql
+  SELECT m.id, m.content, m.like_count, m.time, mb.name AS sender_name
+  FROM message m
+  JOIN member mb ON m.member_id = mb.id
+  WHERE mb.username = 'test';
+  ```
 
 ![Local Image](./screenshot/task5-3.png)
 
@@ -247,7 +249,7 @@ WHERE mb.username = 'test';
   WHERE mb.username = 'test';
   ```
 
-  ![Local Image](./screenshot/task5-4.png)
+![Local Image](./screenshot/task5-4.png)
 
 - Use SELECT, SQL Aggregation Functions with JOIN statement,
   get the average like count of messages GROUP BY sender username.
@@ -260,4 +262,4 @@ WHERE mb.username = 'test';
 
   ```
 
-  ![Local Image](./screenshot/task5-5.png)
+![Local Image](./screenshot/task5-5.png)
