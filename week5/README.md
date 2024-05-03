@@ -181,3 +181,46 @@ FROM (
 ```
 
 ![Local Image](./screenshot/task4-4.png)
+
+### Task 5
+
+- Create a new table named message, in the website database. designed as below:
+
+```sql
+CREATE TABLE message (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    member_id BIGINT NOT NULL,
+    content VARCHAR(255) NOT NULL,
+    like_count INT UNSIGNED NOT NULL DEFAULT 0,
+    time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (member_id) REFERENCES member(id)
+);
+
+```
+
+![Local Image](./screenshot/task5-1.png)
+
+- SELECT all messages, including sender names. We have to JOIN the member table to get that.
+
+  - insert some sample messages into the message table
+
+  ```sql
+  INSERT INTO message (member_id, content, like_count, time)
+  VALUES
+  (1, 'Hello!', 15, '2024-05-02 15:00:00'),
+  (2, 'Nice pic!', 25, '2024-05-02 15:05:00'),
+  (3, 'How are u doing?', 10, '2024-05-02 15:10:00'),
+  (4, 'Good morning, guys!', 15, '2024-05-02 15:15:00'),
+  (5, 'Would anyone like to hang out this weekend?', 20, '2024-05-02 15:20:00');
+
+  ```
+
+  - include the sender's names
+
+  ```sql
+  SELECT m.id, m.content, m.like_count, m.time, mb.name AS sender_name
+  FROM message m
+  JOIN member mb ON m.member_id = mb.id;
+  ```
+
+  ![Local Image](./screenshot/task5-2.png)
