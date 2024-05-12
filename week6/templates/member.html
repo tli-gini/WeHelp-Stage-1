@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歡迎光臨</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #223344;
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    .signin-header {
+      padding: 10px 0;
+    }
+
+    .input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 0;
+    }
+    .input-text {
+      padding-right: 8px;
+      font-weight: 300;
+    }
+    .input-box {
+      width: 120px;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 4px 8px;
+      margin-top: 12px;
+    }
+
+    #msg-container,
+    #chat-container {
+      border-top: 1px solid #e4e4e4;
+      margin-top: 30px;
+    }
+  </style>
+  <body>
+    <div class="header">歡迎光臨，這是會員頁</div>
+    <div class="container">
+      <div class="signin-header" id="usernameDisplay">
+        {{name}}，歡迎登入系統
+      </div>
+      <div class="homepage-link">
+        <a href="http://127.0.0.1:8000">登出系統</a>
+      </div>
+    </div>
+    <div class="container" id="msg-container">
+      <div class="signin-header">快來留言吧！</div>
+      <div class="input">
+        <div class="input-text">內容</div>
+        <input class="input-box" id="message" type="text" name="message" />
+      </div>
+      <div class="button">
+        <button id="submitBtn" type="submit">送出</button>
+      </div>
+    </div>
+    <div class="container" id="chat-container">
+      <!-- Placeholder for messages -->
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetchMessages(); // Call on page load
+      });
+      function fetchMessages() {
+        const chatContainer = document.getElementById("chat-container");
+        fetch("http://127.0.0.1:8000/getMessage", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            chatContainer.innerHTML = ""; // Clear existing messages
+            const messages = data.messages;
+            messages.forEach((item) => {
+              if (Array.isArray(item) && item.length === 2) {
+                // Ensure each item is an array of two elements
+                const name = item[0];
+                const message = item[1];
+                const messageDiv = newMessageDiv(name, message);
+                chatContainer.appendChild(messageDiv);
+              }
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching messages:", error);
+            chatContainer.innerHTML = "<div>Error loading messages.</div>"; // Display error message in the container
+          });
+      }
+
+      function newMessageDiv(name, message) {
+        const div = document.createElement("div");
+        div.textContent = `${name}: ${message}`;
+        return div;
+      }
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function () {
+          const messageInput = document.getElementById("message");
+          const message = messageInput.value;
+          const nameDisplay =
+            document.getElementById("usernameDisplay").textContent;
+          const name = nameDisplay.split("，")[0];
+
+          if (!message.trim()) {
+            alert("請輸入訊息內容！");
+            return;
+          }
+
+          fetch("http://127.0.0.1:8000/createMessage", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, message }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(
+                  "Network response was not ok " + response.statusText
+                );
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (data.success) {
+                console.log("Message sent successfully:", data);
+                messageInput.value = ""; // Optionally clear the message input box after successful send
+                fetchMessages(); // Fetch messages again to update the list
+              } else {
+                console.error("Failed to send message:", data);
+              }
+            })
+            .catch((error) => {
+              console.error("Error sending message:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歡迎光臨</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #223344;
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    .signin-header {
+      padding: 10px 0;
+    }
+    .input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 0;
+    }
+    .input-text {
+      padding-right: 8px;
+      font-weight: 300;
+    }
+    .input-box {
+      width: 120px;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 4px 8px;
+      margin-top: 12px;
+    }
+
+    #sec-container {
+      border-top: 1px solid #e4e4e4;
+      margin-top: 30px;
+    }
+  </style>
+  <body>
+    <div class="header">歡迎光臨，請註冊登入系統</div>
+    <form action="/signup" method="post" id="signupForm">
+      <div class="container">
+        <div class="signin-header">註冊帳號</div>
+        <div class="inputs">
+          <div class="input">
+            <div class="input-text">姓名</div>
+            <input class="input-box" id="yourname" type="text" name="name" />
+          </div>
+          <div class="input">
+            <div class="input-text">帳號</div>
+            <input
+              class="input-box"
+              id="username"
+              type="text"
+              name="username"
+            />
+          </div>
+          <div class="input">
+            <div class="input-text">密碼</div>
+            <input
+              class="input-box"
+              id="password"
+              type="password"
+              name="password"
+            />
+          </div>
+        </div>
+        <div class="button">
+          <button type="submit" id="signinButton">註冊</button>
+        </div>
+
+        <div id="message-container"></div>
+        <script>
+          window.addEventListener("DOMContentLoaded", (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const signupSuccess = urlParams.get("signup_success");
+            if (signupSuccess === "true") {
+              alert("Signup successful! Welcome to our site.");
+            }
+          });
+        </script>
+      </div>
+    </form>
+    <form action="/signin" method="post" id="loginForm">
+      <div class="container" id="sec-container">
+        <div class="signin-header">登入系統</div>
+        <div class="inputs">
+          <div class="input">
+            <div class="input-text">帳號</div>
+            <input
+              class="input-box"
+              id="username"
+              type="text"
+              name="username"
+            />
+          </div>
+          <div class="input">
+            <div class="input-text">密碼</div>
+            <input
+              class="input-box"
+              id="password"
+              type="password"
+              name="password"
+            />
+          </div>
+        </div>
+        <div class="button">
+          <button type="submit" id="signinButton">登入</button>
+        </div>
+      </div>
+    </form>
+    <script></script>
+  </body>
+</html>
