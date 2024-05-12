@@ -78,7 +78,9 @@ async def member_name(request: Request, name:str=Form(None)):
     name = request.session.get("name")
     if not name:
         return RedirectResponse(url="/error?message=用戶未登入", status_code=303)
-    return templates.TemplateResponse("member.html", {"request": request, "name": name})
+    else:
+        messages = get_msg() 
+        return templates.TemplateResponse("member.html", {"request": request, "name": name, "messages": messages})
 
 @app.get("/signout")
 async def signout(request: Request):
@@ -86,26 +88,30 @@ async def signout(request: Request):
     return RedirectResponse(url="/", status_code=303)
 
 @app.post("/createMessage")
-async def create_message(request: Request,  message_data: MessageData):
+async def create_message(request: Request,  message: str = Form(...)):
     if not request.session.get("SIGNED-IN"):
         return JSONResponse(status_code=403, content={"message": "User not signed in"})
     username = request.session.get("username")
-    # Assuming we have a function that processes the message
-    result = create_msg(username, message_data.message)
+    
+    name = request.session.get("name")
+    print("Received message from:", username, "Message:", message)
+
+    result = create_msg(username, message)
     
     if result:
-        return JSONResponse(status_code=200, content={"success": result})
-  
+        messages = get_msg()  # Refresh messages to include the new one
+        return templates.TemplateResponse("member.html", {"request": request, "name": name, "messages": messages})
     else:
-        return JSONResponse(status_code=500, content={"message": "Failed to send message"})
+        
+        return templates.TemplateResponse("error.html", {"request": request, "message": "fail to create message"})
     
-@app.get("/getMessage")
-async def get_message(request: Request):
-    if not request.session.get("SIGNED-IN"):    
-        return JSONResponse(status_code=403, content={"message": "User not signed in"})   
-    else:
-        messages = get_msg()
-        return JSONResponse(status_code=200, content={"messages": messages})
+# @app.get("/getMessage")
+# async def get_message(request: Request):
+#     if not request.session.get("SIGNED-IN"):    
+#         return JSONResponse(status_code=403, content={"message": "User not signed in"})   
+#     else:
+#         messages = get_msg()
+#         return templates.TemplateResponse(status_code=200, content={"messages": messages})
   
  
 
