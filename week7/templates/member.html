@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歡迎光臨</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #223344;
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    .signin-header {
+      padding: 10px 0;
+      font-weight: 400;
+    }
+
+    .input-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input-box {
+      width: 130px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    .input-box::placeholder {
+      font-size: 12px;
+      font-weight: 200;
+    }
+
+    .output-text {
+      margin-top: 8px;
+      font-weight: 300;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  </style>
+  <body>
+    <div class="header">歡迎光臨，這是會員頁</div>
+    <div class="container">
+      <div class="signin-header" id="usernameDisplay">
+        {{ name }}，歡迎登入系統
+      </div>
+      <div class="homepage-link">
+        <a href="http://127.0.0.1:8000">登出系統</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="signin-header">查詢會員姓名</div>
+      <div class="input-container">
+        <input
+          class="input-box"
+          id="usernameInput"
+          type="text"
+          placeholder=" 輸入會員帳號"
+        />
+
+        <div class="button">
+          <button id="searchBtn" onclick="callMember()">查詢</button>
+        </div>
+      </div>
+      <p class="output-text" id="result"></p>
+    </div>
+    <div class="container">
+      <div class="signin-header">更新我的姓名</div>
+      <div class="input-container">
+        <input
+          class="input-box"
+          id="newNameInput"
+          type="text"
+          placeholder=" 輸入新的姓名"
+        />
+
+        <div class="button">
+          <button id="renewBtn" type="submit" onclick="renewMemberName()">
+            更新
+          </button>
+        </div>
+      </div>
+      <p class="output-text" id="result2"></p>
+    </div>
+  </body>
+  <script>
+    const usernameInput = document.querySelector("#usernameInput");
+
+    let memberName = "";
+    const callMember = () => {
+      event.preventDefault();
+      memberName = usernameInput.value;
+      console.log(memberName);
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      fetch(`http://127.0.0.1:8000/api/member?username=${memberName}`, options)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          let result = document.querySelector("#result");
+          result.innerHTML = "";
+          if (data.data) {
+            let userinfo = data.data;
+            console.log(userinfo);
+            result.innerHTML +=
+              "<div>" +
+              userinfo.name +
+              " (" +
+              userinfo.username +
+              ") " +
+              "</div>";
+          } else {
+            result.innerHTML = "無此會員";
+          }
+        })
+        .catch((err) => console.error(err));
+    };
+
+    const newNameInput = document.querySelector("#newNameInput");
+
+    let newMemberName = "";
+    const renewMemberName = () => {
+      event.preventDefault();
+      newMemberName = newNameInput.value;
+      console.log(newMemberName);
+      const options = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: newMemberName }),
+      };
+      fetch(`http://127.0.0.1:8000/api/member`, options)
+        .then((response) => {
+          let result2 = document.querySelector("#result2");
+          result2.innerHTML = "";
+          if (response.ok) {
+            return response.json().then((data) => {
+              result2.innerHTML = "<div>更新成功，請重新登入</div>";
+            });
+          } else {
+            return response.json().then((data) => {
+              result2.innerHTML = "<div>更新失敗</div>";
+            });
+          }
+        })
+        .catch((err) => {
+          let result2 = document.querySelector("#result2");
+          result2.innerHTML = "<div>更新失敗</div>";
+          console.error("Error:", err);
+        });
+    };
+  </script>
+</html>
