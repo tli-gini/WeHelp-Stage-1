@@ -89,10 +89,14 @@ def error(request: Request, message: str = ""):
     return templates.TemplateResponse("error.html", {"request": request, "message": message})
 
 @app.get("/api/member")
-def get_member(username:str=None):
+def get_member(request: Request, username:str=None):
     try:
-        response = get_name(username)
-        return JSONResponse(response, status_code=200)
+        if not request.session.get("SIGNED-IN"):
+            error_message = {"error": True}
+            return JSONResponse(error_message, status_code=401)
+        else:
+            response = get_name(username)
+            return JSONResponse(response, status_code=200)
     except Exception as e:
         error_message = {"error": f"An error occurred: {str(e)}"}
         return JSONResponse(error_message, status_code=500)
@@ -101,18 +105,22 @@ def get_member(username:str=None):
 async def change_name(request:Request, username:str=None, new_name:str=None):
     
     try:
-        body=await request.json()
-        new_name = body.get("name")
-        username = request.session.get("username")
-        user = get_name(username)
-        
-        user_id = user["data"]["id"]
-        print(user_id)
+        if not request.session.get("SIGNED-IN"):
+            error_message = {"error": True}
+            return JSONResponse(error_message, status_code=401)
+        else:
+            body=await request.json()
+            new_name = body.get("name")
+            username = request.session.get("username")
+            user = get_name(username)
+            
+            user_id = user["data"]["id"]
+            print(user_id)
 
-        response=update_name(user_id, new_name)
-        print(username, new_name)
+            response=update_name(user_id, new_name)
+            print(username, new_name)
 
-        return JSONResponse(response, status_code=200)
+            return JSONResponse(response, status_code=200)
     except Exception as e:
         error_message = {"error": f"An error occurred: {str(e)}"}
         return JSONResponse(error_message, status_code=500)
