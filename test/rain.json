@@ -1,0 +1,45 @@
+{
+  "result": {
+    "fields": [
+      {
+        "id": "countryName",
+        "type": "string"
+      },
+      {
+        "id": "StationName",
+        "type": "string"
+      },
+      {
+        "id": "Past24hr_rainfall",
+        "type": "float"
+      },
+      {
+        "id": "StationLatitude",
+        "type": "float"
+      },
+      {
+        "id": "StationLongitude",
+        "type": "float"
+      }
+    ],
+    "rainfall_data": [
+      {
+        "countryName": "臺北市",
+        "stations": [
+          {
+            "StationName": "臺北",
+            "Past24hr_rainfall": 16,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "文山",
+            "Past24hr_rainfall": 20,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          }
+        ]
+      }
+    ]
+  }
+}

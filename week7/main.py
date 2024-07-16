@@ -65,7 +65,7 @@ async def signin(request: Request, username: str = Form(None), password: str = F
         request.session["name"] = name
         request.session["username"] = username
         print("username:",request.session.get("username"))
-        return RedirectResponse(url="/member", status_code=303)
+        return RedirectResponse(url="/member", status_code=200)
     
     
 @app.get("/member")
