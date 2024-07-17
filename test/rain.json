@@ -28,7 +28,7 @@
         "stations": [
           {
             "StationName": "臺北",
-            "Past24hr_rainfall": 16,
+            "Past24hr_rainfall": 100,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
           },
@@ -40,7 +40,7 @@
           },
           {
             "StationName": "文山",
-            "Past24hr_rainfall": 205,
+            "Past24hr_rainfall": 180,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
           },
@@ -64,6 +64,12 @@
           },
           {
             "StationName": "茶改北部分場",
+            "Past24hr_rainfall": 3,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "苗改生物防治研究中心",
             "Past24hr_rainfall": 3,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
