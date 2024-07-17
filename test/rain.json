@@ -33,8 +33,38 @@
             "StationLongitude": 120.83685
           },
           {
-            "StationName": "文山",
+            "StationName": "七股研究中心",
             "Past24hr_rainfall": 20,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "文山",
+            "Past24hr_rainfall": 205,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "通霄漁港",
+            "Past24hr_rainfall": 355,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "陽明山",
+            "Past24hr_rainfall": 15,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "信義",
+            "Past24hr_rainfall": 0,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "茶改北部分場",
+            "Past24hr_rainfall": 3,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
           }
