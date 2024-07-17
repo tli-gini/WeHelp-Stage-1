@@ -67,6 +67,18 @@
             "Past24hr_rainfall": 3,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "國三N425K",
+            "Past24hr_rainfall": 16,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "國三S175K",
+            "Past24hr_rainfall": 8,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
           }
         ]
       },
@@ -114,6 +126,18 @@
             "Past24hr_rainfall": 3,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "國三N425K",
+            "Past24hr_rainfall": 16,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "國三S175K",
+            "Past24hr_rainfall": 8,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
           }
         ]
       },
@@ -159,6 +183,18 @@
           {
             "StationName": "茶改北部分場",
             "Past24hr_rainfall": 3,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "國三N425K",
+            "Past24hr_rainfall": 16,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "國三S175K",
+            "Past24hr_rainfall": 8,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
           }
