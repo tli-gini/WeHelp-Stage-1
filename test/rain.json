@@ -70,7 +70,25 @@
           },
           {
             "StationName": "苗改生物防治研究中心",
-            "Past24hr_rainfall": 3,
+            "Past24hr_rainfall": 6,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "西湖",
+            "Past24hr_rainfall": 123,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "南屯",
+            "Past24hr_rainfall": 10,
+            "StationLatitude": 23.963715,
+            "StationLongitude": 120.83685
+          },
+          {
+            "StationName": "彭佳嶼",
+            "Past24hr_rainfall": 70,
             "StationLatitude": 23.963715,
             "StationLongitude": 120.83685
           }
